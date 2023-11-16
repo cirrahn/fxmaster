@@ -56,7 +56,7 @@ export function FadingFilterMixin(Base) {
         super.play({ skipFading, ...otherOptions });
       } else {
         this.enabled = true;
-        this.animateOptions();
+        this.animateOptions(this.options, { duration: this.options.fadeDuration });
       }
       this.initialized = true;
     }
@@ -66,7 +66,7 @@ export function FadingFilterMixin(Base) {
       if (skipFading) {
         return super.stop({ skipFading, ...otherOptions });
       } else {
-        const completed = await this.animateOptions(this.constructor.neutral);
+        const completed = await this.animateOptions(this.constructor.neutral, { duration: this.options.fadeDuration });
         if (completed) {
           this.enabled = false;
         }
